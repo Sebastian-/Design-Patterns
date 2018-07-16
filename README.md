@@ -23,7 +23,7 @@ My notes on design patterns and their implementation.
 
 ## Patterns
 
-* For a sample implementations, view the respective directory. Code can be run by calling `java <PatternName>` from a shell within the `bin` directory.
+* For sample implementations, view the respective directory. Code can be run by calling `java <PatternName>` from a shell within the `bin` directory.
 
 * Strategy Pattern
     * Useful when an algorithm must be performed on varying data types or with varying implementations.

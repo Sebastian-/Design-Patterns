@@ -3,9 +3,12 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.HashSet;
 
-// TODO - add explanatory comments, debug loop in main to generate more than one grade
-
 interface Observable {
+    /* These are the core methods for an Observable setup.
+    The Java library's observable implementation also includes a "setChanged()"
+    method for the Observable object to set if its data has changed enough
+    to warrant an update notification.
+    */
     public void addObserver(Observer observer);
     public void removeObserver(Observer observer);
     public void notifyObservers();
@@ -13,11 +16,16 @@ interface Observable {
 
 interface Observer {
     // Usually the data parameter has the type Object to allow for any kind of data to be passed.
+    // With this implementation, data is being pushed to observers on update.
     public void update(Integer data);
+
+    // A pull implementation would pass the Observable object, giving Observers the chance to poll it
+    // public void update(Observable subject);
 }
 
 class ReportCard implements Observable {
-    // Observers can be stored in any type of collection. Sets are convenient because observers can be added/removed in constant time
+    // Observers can be stored in any type of collection.
+    // Sets are convenient because observers can be added/removed in constant time.
     private Set<Observer> observers;
     private int grade;
 
@@ -48,6 +56,7 @@ class ReportCard implements Observable {
 
 }
 
+// An observer for displaying the average of all grades recieved from the ReportCard class
 class AverageGradeObserver implements Observer {
     private Observable grades;
     private int numberOfGrades;
@@ -71,6 +80,7 @@ class AverageGradeObserver implements Observer {
     }
 }
 
+// An observer for displaying the current grade of the ReportCard class
 class CurrentGradeObserver implements Observer {
     private Observable grades;
     private int grade;
@@ -100,11 +110,8 @@ class ObserverPattern {
         Scanner input = new Scanner(System.in);
         do {
             reportCard.generateGrade();
-            System.out.println("Press enter to get a new grade, or g to graduate...");
-            if(input.hasNext("g")) break;
+            System.out.println("Press enter to get a new grade, or ctrl+c to quit");
             input.nextLine();
         } while(true);
-
-        System.out.println("No more grades. You have graduated!");
     }
 }
