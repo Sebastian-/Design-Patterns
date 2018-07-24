@@ -19,7 +19,7 @@ interface Observer {
     // With this implementation, data is being pushed to observers on update.
     public void update(Integer data);
 
-    // A pull implementation would pass the Observable object, giving Observers the chance to poll it
+    // A pull implementation would pass the Observable object itself, giving Observers the chance to poll it
     // public void update(Observable subject);
 }
 
@@ -69,11 +69,21 @@ class AverageGradeObserver implements Observer {
         this.gradeSum = 0;
     }
 
+    // Updated data is pushed through this method
     public void update(Integer grade) {
         this.numberOfGrades++;
         this.gradeSum += grade;
         display();
     }
+
+    /* Update using the "pull" method:
+
+    public void update(Observable reportCard) {
+        this.numberOfGrades++;
+        this.gradeSum += reportCard.getGrade();
+        display();
+    }
+    */
 
     private void display() {
         System.out.println("The average grade is: " + (this.gradeSum / this.numberOfGrades));
@@ -114,4 +124,20 @@ class ObserverPattern {
             input.nextLine();
         } while(true);
     }
+
+    /* Sample output when running the program:
+    $ java ObserverPattern
+    The average grade is: 33
+    The current grade is: 33
+    Press enter to get a new grade, or ctrl+c to quit
+
+    The average grade is: 51
+    The current grade is: 70
+    Press enter to get a new grade, or ctrl+c to quit
+
+    The average grade is: 52
+    The current grade is: 55
+    Press enter to get a new grade, or ctrl+c to quit
+
+    */
 }
