@@ -59,7 +59,9 @@ class StrategyPattern {
         two.setAlgorithm(new AlgorithmOne());
         two.callAlgorithm();
 
-        /* Output:
+        /* Result of running the program:
+
+        $ java StrategyPattern
         Running algorithm 1
         Running algorithm 2
         Running algorithm 1
