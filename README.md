@@ -9,7 +9,7 @@ Notes on design patterns and their implementation.
     * For example, calculating employee wages will vary based on each employee's contract, but the same general process should apply. If the variations among employees can be encapsulated, the core payroll program will not have to change as often.
 
 * Program to an abstraction, not a concrete implementation
-    * For parts of a program which interact with a component which varies, it's important to program to an abstraction of that component.
+    * For parts of a program which interact with a component which varies, it's important to program to a stable abstraction of that component.
     * Programming to an implementation means relying on details specific to one concrete class. Often a program will work with a certain abstract class of data, among which there will be a number of concrete subclasses. It is impractical to call on different methods for each of the different subclasses. Instead, the program should call on an abstraction of those methods, and allow for each subclass to handle it's own implementation.
 
 * Composition over inheritance
@@ -21,7 +21,7 @@ Notes on design patterns and their implementation.
 
 * Classes should be open for extension, but closed for modification (Open-Closed Principle)
     * It is wasteful to alter code which is already written, tested, and known to work. Once a class has been implemented, it should not have to change in response to changing requirements. Instead, a class should be easily extensible, allowing for new code to be built on top of it to meet changing requirements.
-    * This principle should only be applied to areas of the application which are likely to change. Knowing what those areas are comes down to experience and having good domain knowledge.
+    * This principle can make programs unnecessarily complicated, and should only be applied to areas which are likely to see change. Knowing what those areas are comes down to experience and having good domain knowledge.
     * Examples
         * The observer pattern allows for a subject object to be extended by its observers without having to change itself.
         * The decorator pattern allows for new functionality to be wrapped around existing objects without modifying the core object.
@@ -53,15 +53,15 @@ Notes on design patterns and their implementation.
     * Pull method - the subject merely signals a change has occurred, after which the observer is responsible for pulling data from the subject.
         * Pros - Subject implementation is simpler and many different types of observers can be added easily (i.e. more extensible).
         * Cons - In order to poll the subject, observers need to interact with the concrete implementation of the subject class instead of the generic observable interface. This means the subject and its observers are tightly coupled, meaning that changes to the subject may require changes to the observers.
-        * Best used when a subject will have many different types of observers and could be extended in many ways.
+        * Best used when a subject will have many different types of observers and needs to be extended in many ways.
 * GUI frameworks often make use of this pattern - observers are usually implemented as callback functions (Java wraps lambda functions into observer objects behind the scenes).
 
 
 ### Decorator Pattern
 
 * Definition - The decorator pattern attaches additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
-    * Decorators "attach" to an object through composition. Each decorator maintains a field to the core object it decorates.
-    * Decorator classes have the same type as the objects they decorate, either through inheritance or interface implementation. This makes them interchangeable with the original object, and as a result, available for composition to other decorators.
+    * Decorators "attach" to an object through composition. Each decorator maintains a referrence to the core object it decorates.
+    * Decorator classes have the same type as the objects they decorate, either through inheritance or interface implementation. This makes them interchangeable with the original object, and as a result, available for composition with other decorators.
     * Decorators extend functionality by implementing their own logic on top of a call to the core object's methods, or replace the core object's methods entirely.
 * The decorator pattern is useful when a system requires many different variations of an object.
 * The Java I/O library makes heavy use of decorators to customize input and output stream objects. This makes it possible to easily extend or implement custom streams.
