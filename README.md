@@ -34,17 +34,17 @@ Notes on design patterns and their implementation.
 
 ### Strategy Pattern
 
-* Useful when an algorithm must be performed on varying data types or with varying implementations.
 * Definition - The strategy pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
     * In Java, each algorithm can be encapsulated by implementing it within its own class. These classes are made interchangeable by implementing a common interface, allowing clients to access any one of them in the same way.
+* Useful when an algorithm must be performed on varying data types or with varying implementations.
 
 
 ### Observer Pattern
 
-* Useful when the real-time state of a subject object is interesting to an undefined number of observing objects.
 * Definition - The observer pattern defines a one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically.
     * The one-to-many dependency refers to relationship between a single subject and its many observers.
     * Automatic updating improves efficiency, as each observer would otherwise have to poll the subject constantly.
+* Useful when the changing state of a subject object is interesting to an undefined number of observing objects.
 * Push vs. Pull methods of transmitting data
     * Push method - the subject object will send each observer the exact data it needs.
         * Pros - Observer implementation is simpler and coupling between the observer and subject is minimized.
@@ -70,6 +70,15 @@ Notes on design patterns and their implementation.
     * Decorators mask the concrete type of their core object. This means decoration will break any code relying on the concrete type of an object.
     * Instantiating components with lots of decorators can quickly get out of hand.
 
+
+### Factory Pattern
+
+* There are two common variations on the factory pattern: the factory method pattern, and the abstract factory pattern.
+    * The differences between them boil down to which parts of a system need to remain flexible....(TODO: come back to this)
+
+* Factory Method Pattern
+    * Definition - The factory method pattern defines an interface for creating an object, but lets subclasses decide which class to instantiate. This allows a class to defer instantiation to subclasses.
+    * By using this pattern, a class can define methods which make use of the objects a factory method will produce, without being tied to a single, concrete implementation of those objects. Subclasses will implement the factory method to produce relevant objects.
 
 ## Sources
 
