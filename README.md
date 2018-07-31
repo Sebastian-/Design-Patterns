@@ -26,6 +26,14 @@ Notes on design patterns and their implementation.
         * The observer pattern allows for a subject object to be extended by its observers without having to change itself.
         * The decorator pattern allows for new functionality to be wrapped around existing objects without modifying the core object.
 
+* Dependency Inversion Principle
+    * Depend upon abstractions. Do not depend upon concrete classes.
+    * Similar to "Program to an abstraction, not a concrete implementation" but focuses more on the structure of a program rather than its implementation.
+    * High-level modules should not depend on low-level modules, both should depend on abstractions
+        * A high-level module is one which makes use of other modules to define its behavior. Instead of using the lower-level modules directly, both should conform to a common interface. In this way, the implementation of both can change without breaking the interaction bewteen them.
+    * Abstractions should not depend on details, details should depend on abstractions
+        * Said another way, abstractions should not change as details about the underlying objects change. Instead, changing details should stay within the bounds of their object's abstraction.
+
 
 ## Patterns
 
@@ -73,12 +81,12 @@ Notes on design patterns and their implementation.
 
 ### Factory Pattern
 
-* There are two common variations on the factory pattern: the factory method pattern, and the abstract factory pattern.
-    * The differences between them boil down to which parts of a system need to remain flexible....(TODO: come back to this)
-
+* There are two common variations on the factory pattern: the factory method pattern, and the abstract factory pattern. Both are meant to encapsulate object creation, but go about it in different ways.
 * Factory Method Pattern
     * Definition - The factory method pattern defines an interface for creating an object, but lets subclasses decide which class to instantiate. This allows a class to defer instantiation to subclasses.
-    * By using this pattern, a class can define methods which make use of the objects a factory method will produce, without being tied to a single, concrete implementation of those objects. Subclasses will implement the factory method to produce relevant objects.
+        * The "interface for creating an object" includes the factory methods meant for instantiating objects, as well as the interface those objects must adhere to.
+        * By using this pattern, a class can define methods which make use of the objects a factory method will produce, without being tied to a single, concrete implementation of those objects.
+        * Subclasses will implement the factory method to produce relevant objects.
 
 ## Sources
 
