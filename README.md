@@ -84,9 +84,15 @@ Notes on design patterns and their implementation.
 * There are two common variations on the factory pattern: the factory method pattern, and the abstract factory pattern. Both are meant to encapsulate object creation, but go about it in different ways.
 * Factory Method Pattern
     * Definition - The factory method pattern defines an interface for creating an object, but lets subclasses decide which class to instantiate. This allows a class to defer instantiation to subclasses.
-        * The "interface for creating an object" includes the factory methods meant for instantiating objects, as well as the interface those objects must adhere to.
-        * By using this pattern, a class can define methods which make use of the objects a factory method will produce, without being tied to a single, concrete implementation of those objects.
-        * Subclasses will implement the factory method to produce relevant objects.
+        * The "interface for creating an object" includes the factory method meant for instantiating objects, as well as the interface the instantiated objects must adhere to.
+        * By using this pattern, a class can define functionality which makes use of the objects a factory method will produce, without being tied to a single, concrete implementation of those objects.
+        * Subclasses will implement the factory method to instantiate relevant objects for themselves.
+* Abstract Factory Pattern
+    * Definition - Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+        * One interface defines the factory object itself, with each method responsible for instantiating an object of a family/category.
+        * Each family/category of objects must also implement a common interface. This ensures that a client of the factory will be decoupled from the underlying concrete objects.
+    * Essentially an extended version of the factory method pattern. It ties together the creation of related objects through the use of multiple factory methods in a single object.
+    * Abstract factory objects are used by clients to instantiate the objects they require. This differs from the factory method pattern, where subclasses implement and use the factory method directly.
 
 ## Sources
 
