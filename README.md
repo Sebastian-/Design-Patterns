@@ -37,7 +37,7 @@ Notes on design patterns and their implementation.
 
 ## Patterns
 
-* For sample implementations, view the respective directory. Code can be run by calling `java <PatternName>` from a shell within the `bin` directory.
+For sample implementations, view the respective directory. Code can be run by calling `java <PatternName>` from a shell within the `bin` directory.
 
 
 ### Strategy Pattern
@@ -93,6 +93,23 @@ Notes on design patterns and their implementation.
         * Each family/category of objects must also implement a common interface. This ensures that a client of the factory will be decoupled from the underlying concrete objects.
     * Essentially an extended version of the factory method pattern. It ties together the creation of related objects through the use of multiple factory methods in a single object.
     * Abstract factory objects are used by clients to instantiate the objects they require. This differs from the factory method pattern, where subclasses implement and use the factory method directly.
+
+
+### Singleton Pattern
+
+* Definition - The singleton pattern ensures a class has only one instance, and provides a global point of access to it.
+* This pattern is useful in providing a single point of control for a resource. It can be used to contain some global state, or act as a controller for some other subsystem (eg. a pool of threads or network connections).
+* Implementation details
+    * The class' constructor is private. This ensures that the class cannot be instantiated from the outside.
+    * The class contains a private field of its own type to which it assigns a single instance of itself.
+    * Access to the singleton is managed by a globally available method (in Java this is a static method) which instantiates the object if it hasn't already been created.
+    * Potential Problems - see sample implementation for more details
+        * When instantiating the singleton through its access method, some scenarios involving multiple threads can lead to creating more than one singleton object.
+            * If performance isn't critical (i.e. the singleton is not accessed often), mark the method used to access the singleton as `synchronized`. The synchronized keyword ensures that only a single thread can access a method at one time. This can decrease performance by a factor of 100 in some cases.
+            * If the singleton object is always used and is not expensive to create, simply instantiate it from the very beginning.
+            * Double-checked locking is a middle-ground between the previous two solutions. It allows for lazy instantiation of the object, but does incur some overhead by synchronizing the instantiation of the object on the first time through. The features required for this strategy are not available in Java 1.4 or earlier.
+            * The preferred thread-safe solution is to use a strategy called [Initialization on Demand Holder Idiom](https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom). This strategy can fail if the instantiation of the singleton is not guaranteed to succeed.
+        * In very early versions of Java (< 1.2) singletons would be garbage collected unless an outside referrence to them was maintained.
 
 ## Sources
 
